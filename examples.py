@@ -12,6 +12,17 @@ def exponential_moving_average(xs, smooth, init):
             smoothed[t] = (1-smooth)*xs[t-1] + smooth*smoothed[t-1]
     return smoothed
 
+def ema_pypy(xs, smooth, init):
+    smoothed = []
+    for t in range(len(xs)):
+        if t == 0:
+            smoothed.append(init)
+        else:
+            smoothed.append(
+                (1-smooth)*xs[t-1] + smooth*smoothed[-1]
+            )
+    return smoothed
+
 def json_dumps_loads(data):
     return json.loads(json.dumps(data))
 
